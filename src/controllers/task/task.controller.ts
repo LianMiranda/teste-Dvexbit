@@ -33,5 +33,64 @@ export const TaskController = {
         } catch (error) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "Erro inesperado no servidor"});
         }
+    },
+
+    findAll: async (req: Request, res: Response) => {
+        try {
+            const getTasks = await taskService.findAll()
+
+            if(getTasks.length === 0){
+                res.status(StatusCodes.NOT_FOUND).json({message: "Nenhuma tarefa encontrada"});
+                return;
+            }
+
+            res.status(StatusCodes.OK).json({tasks: getTasks});
+        } catch (error) {
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "Erro inesperado no servidor"});
+        }
+    },
+
+    findById:async (req: Request, res: Response) => {
+        try {
+            const id = req.params.id;
+            
+            const getTask = await taskService.findById(id)
+
+            if(!getTask){
+                res.status(StatusCodes.NOT_FOUND).json({message: "Nenhuma tarefa encontrada"});
+                return;
+            }
+
+            res.status(StatusCodes.OK).json({task: getTask});
+        } catch (error) {
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "Erro inesperado no servidor"});
+        }
+    },
+
+    update:async (req: Request, res: Response) => {
+        
+    },
+
+    delete:async (req: Request, res: Response) => {
+        try{
+            const id = req.params.id;
+            const verifyId = await taskService.findById(id)
+
+            if(!verifyId){
+                res.status(StatusCodes.NOT_FOUND).json({message: `Tarefa com o id ${id} não encontrada`});
+                return;
+            }
+            const deleteTask = await taskService.delete(id)
+        
+            if(!deleteTask){
+                res.status(StatusCodes.NOT_FOUND).json({message: "Nenhuma tarefa encontrada"});
+                return;
+            }
+
+            res.status(StatusCodes.OK).json({message: `Tarefa com o id ${id} deletada com sucesso!`});
+        } catch (error) {
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "Erro inesperado no servidor"});
+        }
     }
+
 }
