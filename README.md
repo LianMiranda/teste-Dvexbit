@@ -1,6 +1,6 @@
 # teste-Dvexbit
 
-Este projeto é uma API desenvolvida em Node.js com Express e TypeScript, com o objetivo de gerenciar tarefas (CRUD). Ele utiliza o Prisma para interação com o banco de dados, além de contar com validações e tratamento de erros centralizado.
+Este projeto é uma API desenvolvida em Node.js com Express e TypeScript, com o objetivo de gerenciar tarefas (CRUD). Ele utiliza o Prisma para interação com o banco de dados postgreSQL, além de contar com validações e tratamento de erros centralizado.
 
 ## Sumário
 
@@ -48,16 +48,21 @@ Este projeto é uma API desenvolvida em Node.js com Express e TypeScript, com o 
 
 3. **Configuração das Variáveis de Ambiente**
 
-   Crie um arquivo `.env` na raiz do projeto e defina as variáveis necessárias, como demonstrado no arquivo .env.example
+   Crie um arquivo `.env` na raiz do projeto e defina as variáveis necessárias, como demonstrado no arquivo `.env.example`
 
 
-4. **Executar Migrações (se aplicável)**
+4. **Executar Migrações**
+
+   ```bash
+   npx prisma migrate dev
+   ```
+5. **Gere o Prisma Client**
 
    ```bash
    npx prisma migrate dev
    ```
 
-5. **Inicie a Aplicação**
+6. **Inicie a Aplicação**
    Para rodar a aplicação em ambiente de desenvolvimento, você pode utilizar:
 
    ```bash
