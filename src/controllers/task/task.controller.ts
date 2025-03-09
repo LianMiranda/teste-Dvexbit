@@ -84,8 +84,8 @@ export const TaskController = {
                 return;
             }
 
-            await taskService.update(id, data);
-            res.status(StatusCodes.OK).json({message: "Tarefa atualizada com sucesso!"});
+            const updateTask = await taskService.update(id, data);
+            res.status(StatusCodes.OK).json({message: "Tarefa atualizada com sucesso!", task: updateTask});
 
         }  catch (error) {
             next(error)
