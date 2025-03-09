@@ -59,7 +59,7 @@ Este projeto é uma API desenvolvida em Node.js com Express e TypeScript, com o 
 5. **Gere o Prisma Client**
 
    ```bash
-   npx prisma migrate dev
+   npx prisma generate
    ```
 
 6. **Inicie a Aplicação**
