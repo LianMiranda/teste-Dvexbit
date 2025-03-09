@@ -63,6 +63,7 @@ Este projeto é uma API desenvolvida em Node.js com Express e TypeScript, com o 
    ```
 
 6. **Inicie a Aplicação**
+   
    Para rodar a aplicação em ambiente de desenvolvimento, você pode utilizar:
 
    ```bash
