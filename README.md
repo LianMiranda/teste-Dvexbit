@@ -120,7 +120,7 @@ Este projeto é uma API desenvolvida em Node.js com Express e TypeScript, com o 
   - **DELETE /task/:id**
   - **Parâmetro:** `id` da tarefa
   - **Resposta:**  
-    - **Status:** 200 (OK) ou 204 (No Content)  
+    - **Status:** 200 (OK)
     - **Body:** `{message: "Tarefa com o id 123 deletada com sucesso!"}`
 
 ## Tratamento de Erros
