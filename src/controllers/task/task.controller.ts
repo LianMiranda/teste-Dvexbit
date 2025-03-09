@@ -10,32 +10,30 @@ interface ITask {
 }
 
 export const TaskController = {
-    create: async (req: Request<{}, {}, ITask>, res: Response) => {
+    create: async (req: Request<{}, {}, ITask>, res: Response, next: NextFunction) => {
         try {
             const data: ITask = req.body;
-    
-            if(data.titulo == undefined || data.titulo.trim() == ""){
+
+            if(!data.titulo || data.titulo.trim() == ""){
                 res.status(StatusCodes.BAD_REQUEST).json({message: "Verifique se os campos foram preenchidos corretamente"});
                 return;
             }
-    
-            const validDate = verifyDate(data.dataDaAtividade);
-    
-            if(!validDate){
-                res.status(StatusCodes.BAD_REQUEST).json({message: "A data deve estar no formato YYYY-MM-DD"});
+
+            if(!data.dataDaAtividade || data.dataDaAtividade.trim() === ""){
+                res.status(StatusCodes.BAD_REQUEST).json({message: "Verifique se os campos foram preenchidos corretamente"});
                 return;
             }
-    
-            const task = await taskService.create(data.titulo, data.descricao, data.dataDaAtividade);
-    
-        res.status(StatusCodes.CREATED).json({message: "Tarefa criada com sucesso", task});
-    
+
+            const task = await taskService.create(data);
+          
+            res.status(StatusCodes.CREATED).json({message: "Tarefa criada com sucesso", task});
+            
         } catch (error) {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "Erro inesperado no servidor"});
+           next(error)
         }
     },
 
-    findAll: async (req: Request, res: Response) => {
+    findAll: async (req: Request, res: Response, next: NextFunction) => {
         try {
             const getTasks = await taskService.findAll()
 
@@ -46,11 +44,11 @@ export const TaskController = {
 
             res.status(StatusCodes.OK).json({tasks: getTasks});
         } catch (error) {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "Erro inesperado no servidor"});
+            next(error)
         }
     },
 
-    findById:async (req: Request, res: Response) => {
+    findById:async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = req.params.id;
             
@@ -62,16 +60,39 @@ export const TaskController = {
             }
 
             res.status(StatusCodes.OK).json({task: getTask});
-        } catch (error) {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "Erro inesperado no servidor"});
+        }  catch (error) {
+            next(error)
         }
     },
 
-    update:async (req: Request, res: Response) => {
-        
+    update:async (req: Request<{id: string}, {}, ITask>, res: Response, next: NextFunction) => {
+        try{
+            const id = req.params.id;
+            const verifyId = await taskService.findById(id);
+            
+            if(!verifyId){
+                res.status(StatusCodes.NOT_FOUND).json({message: `Tarefa com o id ${id} não encontrada`});
+                return;
+            }
+            
+            const data: ITask = req.body;
+            
+            console.log(data);
+            
+            if(!data.titulo && !data.descricao && !data.dataDaAtividade){
+                res.status(StatusCodes.BAD_REQUEST).json({message: "Informe ao menos um valor para atualizar"});
+                return;
+            }
+
+            await taskService.update(id, data);
+            res.status(StatusCodes.OK).json({message: "Tarefa atualizada com sucesso!"});
+
+        }  catch (error) {
+            next(error)
+        }
     },
 
-    delete:async (req: Request, res: Response) => {
+    delete:async (req: Request, res: Response, next: NextFunction) => {
         try{
             const id = req.params.id;
             const verifyId = await taskService.findById(id)
@@ -89,7 +110,7 @@ export const TaskController = {
 
             res.status(StatusCodes.OK).json({message: `Tarefa com o id ${id} deletada com sucesso!`});
         } catch (error) {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "Erro inesperado no servidor"});
+            next(error)
         }
     }
 

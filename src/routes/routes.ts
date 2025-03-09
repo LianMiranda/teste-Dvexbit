@@ -10,7 +10,7 @@ router.post("/task", TaskController.create);
 
 router.get("/tasks", TaskController.findAll)
 router.get("/task/:id", TaskController.findById)
-router.put("/task/:id")
+router.put("/task/:id", TaskController.update)
 router.delete("/task/:id", TaskController.delete)
 
 
