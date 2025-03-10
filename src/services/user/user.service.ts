@@ -77,7 +77,8 @@ export const UserService = {
             const user = await prisma.user.findUnique({
                 where: {email},
             });
-
+            
+            
             return user;
         },
 
@@ -87,7 +88,7 @@ export const UserService = {
             if(!data.email && !data.password && !data.firstName && !data.lastName){
                 throw new AppError("Informe ao menos um valor para atualizar", StatusCodes.BAD_REQUEST);
             }
-            
+
             const verifyUserExists = await this.findById(id);
                             
             if(!verifyUserExists){

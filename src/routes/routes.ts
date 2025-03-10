@@ -1,6 +1,7 @@
 import {Router} from "express";
 import { TaskController } from "../controllers/task/task.controller";
 import { UserController } from "../controllers/user/user.controller";
+import { AuthController } from "../controllers/auth/auth.controller";
 
 const router = Router();
 
@@ -14,7 +15,9 @@ router.post("/user", UserController.create);
 router.get("/users", UserController.findAll);
 router.get("/user/:id", UserController.findById)
 router.put("/user/:id", UserController.update)
-router.delete("/user/:id", UserController.delete)
+router.delete("/user/:id", UserController.delete);
+
+router.post("/auth", AuthController.login)
 
 
 
