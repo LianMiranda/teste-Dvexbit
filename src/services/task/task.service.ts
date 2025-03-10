@@ -4,8 +4,8 @@ import { AppError } from "../../utils/appError";
 
 const prisma = new PrismaClient();
 
-export const taskService = {
-    create: async (data:{titulo: string,  descricao: string, dataDaAtividade: string}) => {
+export const TaskService = {
+    create: async (data:{titulo: string,  descricao: string, dataDaAtividade: string, userId: string}) => {
         const validDate = verifyDate(data.dataDaAtividade);
             
         if(!validDate){

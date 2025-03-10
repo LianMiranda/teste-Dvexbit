@@ -1,30 +1,43 @@
 import { Request, Response, NextFunction } from "express";
 import {StatusCodes} from 'http-status-codes'
 import { verifyDate } from "../../utils/dataValidate";
-import { taskService } from "../../services/task/task.service";
+import { TaskService } from "../../services/task/task.service";
+import { UserService } from "../../services/user/user.service";
 
 interface ITask {
     titulo: string;
     descricao: string;
     dataDaAtividade: string;
+    userId: string;
 }
 
 export const TaskController = {
     create: async (req: Request<{}, {}, ITask>, res: Response, next: NextFunction) => {
+        const data: ITask = req.body;
+
+        if(!data.titulo || data.titulo.trim() == ""){
+            res.status(StatusCodes.BAD_REQUEST).json({message: "Verifique se os campos foram preenchidos corretamente"});
+            return;
+        }
+        if(!data.dataDaAtividade || data.dataDaAtividade.trim() === ""){
+            res.status(StatusCodes.BAD_REQUEST).json({message: "Verifique se os campos foram preenchidos corretamente"});
+            return;
+        }
+        if(!data.userId || data.userId.trim() === ""){
+            res.status(StatusCodes.BAD_REQUEST).json({message: "Verifique se os campos foram preenchidos corretamente"});
+            return;
+        }
+
+        
         try {
-            const data: ITask = req.body;
-
-            if(!data.titulo || data.titulo.trim() == ""){
-                res.status(StatusCodes.BAD_REQUEST).json({message: "Verifique se os campos foram preenchidos corretamente"});
+            const verifyUserExists = await UserService.findById(data.userId);
+    
+            if(!verifyUserExists){
+                res.status(StatusCodes.NOT_FOUND).json({message: `Usuário com o id ${data.userId} não existe`});
                 return;
             }
 
-            if(!data.dataDaAtividade || data.dataDaAtividade.trim() === ""){
-                res.status(StatusCodes.BAD_REQUEST).json({message: "Verifique se os campos foram preenchidos corretamente"});
-                return;
-            }
-
-            const task = await taskService.create(data);
+            const task = await TaskService.create(data);
           
             res.status(StatusCodes.CREATED).json({message: "Tarefa criada com sucesso", task});
             
@@ -35,7 +48,7 @@ export const TaskController = {
 
     findAll: async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const getTasks = await taskService.findAll()
+            const getTasks = await TaskService.findAll()
 
             if(getTasks.length === 0){
                 res.status(StatusCodes.NOT_FOUND).json({message: "Nenhuma tarefa encontrada"});
@@ -52,7 +65,7 @@ export const TaskController = {
         try {
             const id = req.params.id;
             
-            const getTask = await taskService.findById(id)
+            const getTask = await TaskService.findById(id)
 
             if(!getTask){
                 res.status(StatusCodes.NOT_FOUND).json({message: "Nenhuma tarefa encontrada"});
@@ -68,7 +81,7 @@ export const TaskController = {
     update:async (req: Request<{id: string}, {}, ITask>, res: Response, next: NextFunction) => {
         try{
             const id = req.params.id;
-            const verifyId = await taskService.findById(id);
+            const verifyId = await TaskService.findById(id);
             
             if(!verifyId){
                 res.status(StatusCodes.NOT_FOUND).json({message: `Tarefa com o id ${id} não encontrada`});
@@ -84,7 +97,7 @@ export const TaskController = {
                 return;
             }
 
-            const updateTask = await taskService.update(id, data);
+            const updateTask = await TaskService.update(id, data);
             res.status(StatusCodes.OK).json({message: "Tarefa atualizada com sucesso!", task: updateTask});
 
         }  catch (error) {
@@ -95,16 +108,17 @@ export const TaskController = {
     delete:async (req: Request, res: Response, next: NextFunction) => {
         try{
             const id = req.params.id;
-            const verifyId = await taskService.findById(id)
+            const verifyId = await TaskService.findById(id);
 
             if(!verifyId){
                 res.status(StatusCodes.NOT_FOUND).json({message: `Tarefa com o id ${id} não encontrada`});
                 return;
             }
-            const deleteTask = await taskService.delete(id)
+
+            const deleteTask = await TaskService.delete(id);
         
             if(!deleteTask){
-                res.status(StatusCodes.NOT_FOUND).json({message: "Nenhuma tarefa encontrada"});
+                res.status(StatusCodes.NOT_FOUND).json({message: "Erro ao deletar tarefa"});
                 return;
             }
 
