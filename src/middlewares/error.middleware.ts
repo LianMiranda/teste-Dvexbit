@@ -8,15 +8,16 @@ export function errorMiddleware(
     next: NextFunction
 ) {
     if (err instanceof AppError) {
-     res.status(err.statusCode).json({
-            status: 'error',
-            message: err.message,
+        res.status(err.statusCode).json({
+                status: 'error',
+                message: err.message,
         });
     }
 
     console.error(err); 
- res.status(500).json({
-        status: 'error',
-        message: 'Internal Server Error',
+
+    res.status(500).json({
+                status: 'error',
+                message: 'Internal Server Error',
     });
 }
