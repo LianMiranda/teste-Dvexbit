@@ -13,10 +13,25 @@ model Task {
   descricao       String?
   dataDaAtividade String
   status          Status @default(PENDENTE)
+  user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
   @@map("task")
+}
+
+model User {
+  id              String   @id @default(uuid())
+  email           String   @unique
+  password        String
+  firstName       String
+  lastName        String
+  tasks           Task[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("user")
 }
 
 enum Status {
