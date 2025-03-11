@@ -12,6 +12,7 @@ export function errorMiddleware(
                 status: 'error',
                 message: err.message,
         });
+        return;
     }
 
     console.error(err); 

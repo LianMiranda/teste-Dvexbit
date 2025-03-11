@@ -85,7 +85,7 @@ export const UserService = {
         async update(id: string, data:{email: string, password: string, actualPassword: string, firstName: string, lastName:string}){
             let password: string;
 
-            if(!data.email && !data.password && !data.firstName && !data.lastName){
+            if(!data.email.trim() && !data.password.trim() && !data.firstName.trim() && !data.lastName.trim()){
                 throw new AppError("Informe ao menos um valor para atualizar", StatusCodes.BAD_REQUEST);
             }
 
@@ -97,14 +97,16 @@ export const UserService = {
 
             const updateUser: Partial<{ email: string, password: string, firstName: string, lastName: string}> = {};
             
-            if (data.email && data.email) {
+            if (data.email && data.email.trim() !== ""){
                 const verifyEmailExists = await this.findByEmail(data.email);
                 if (verifyEmailExists) {
                     throw new AppError("Já existe um usuário com esse e-mail", StatusCodes.CONFLICT);
                 }
+
+                updateUser.email = data.email;
             }
             
-            if(data.password){
+            if(data.password && data.password.trim() !== ""){
                 if (!data.actualPassword) {
                     throw new AppError("Caso queira alterar para uma nova senha, é obrigatório digitar a senha atual.", StatusCodes.BAD_REQUEST)
                 }
@@ -119,8 +121,8 @@ export const UserService = {
                 }
             }
 
-            if(data.firstName) updateUser.firstName = data.firstName
-            if(data.lastName) updateUser.lastName = data.lastName
+            if(data.firstName && data.firstName.trim() !== "") updateUser.firstName = data.firstName
+            if(data.lastName && data.lastName.trim() !== "") updateUser.lastName = data.lastName
     
             const update = prisma.user.update({
                 where:{

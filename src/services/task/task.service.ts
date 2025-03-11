@@ -16,13 +16,13 @@ export const TaskService = {
     async create (data:ITask){
 
         if(!data.titulo || data.titulo.trim() == ""){
-            throw new AppError("Verifique se os campos foram preenchidos corretamente", StatusCodes.BAD_REQUEST)
+            throw new AppError("Verifique se o campo titulo foi preenchido corretamente", StatusCodes.BAD_REQUEST)
         }
         if(!data.dataDaAtividade || data.dataDaAtividade.trim() === ""){
-            throw new AppError("Verifique se os campos foram preenchidos corretamente", StatusCodes.BAD_REQUEST)
+            throw new AppError("Verifique se o campo dataDaAtividade foi preenchido corretamente", StatusCodes.BAD_REQUEST)
         }
         if(!data.userId || data.userId.trim() === ""){
-            throw new AppError("Verifique se os campos foram preenchidos corretamente", StatusCodes.BAD_REQUEST)
+            throw new AppError("Verifique se o campo userId foi preenchido corretamente", StatusCodes.BAD_REQUEST)
         }
 
         const verifyUserExists = await UserService.findById(data.userId);
@@ -38,14 +38,31 @@ export const TaskService = {
         }
     
         const task = await prisma.task.create({
-            data: data
+            data: data,
+            select: {
+                id: true,
+                titulo: true,
+                descricao: true,
+                dataDaAtividade: true,
+                status: true,
+                userId: true
+            }
         }); 
 
         return task;
     },
 
      async findAll() {
-            const tasks = await prisma.task.findMany();
+            const tasks = await prisma.task.findMany({
+                select: {
+                    id: true,
+                    titulo: true,
+                    descricao: true,
+                    dataDaAtividade: true,
+                    status: true,
+                    userId: true
+                }
+            });
 
             if(tasks.length === 0){
                 throw new AppError("Nenhuma tarefa encontrada", StatusCodes.NOT_FOUND)
@@ -56,7 +73,15 @@ export const TaskService = {
 
     async findById(id: string) {
         const task = await prisma.task.findUnique({
-            where:{id}
+            where:{id},
+            select: {
+                id: true,
+                titulo: true,
+                descricao: true,
+                dataDaAtividade: true,
+                status: true,
+                userId: true
+            }
         });
 
         if(!task){
@@ -75,13 +100,13 @@ export const TaskService = {
             throw new AppError("Nenhuma tarefa encontrada", StatusCodes.NOT_FOUND)
         }   
 
-        if(!data.titulo && !data.descricao && !data.dataDaAtividade){
+        if(!data.titulo.trim() && !data.descricao.trim() && !data.dataDaAtividade.trim()){
            throw new AppError("Informe ao menos um valor para atualizar", StatusCodes.BAD_REQUEST)
         }
 
-        if(data.titulo) updateTask.titulo = data.titulo
-        if(data.descricao) updateTask.descricao = data.descricao
-        if(data.dataDaAtividade){
+        if(data.titulo && data.titulo.trim() !== "") updateTask.titulo = data.titulo
+        if(data.descricao && data.descricao.trim() !== "") updateTask.descricao = data.descricao
+        if(data.dataDaAtividade && data.descricao.trim() !== ""){
             const validDate = verifyDate(data.dataDaAtividade);
             
             if(!validDate){
@@ -97,6 +122,13 @@ export const TaskService = {
                     id
                 },
                 data: updateTask,      
+                select: {
+                    id: true,
+                    titulo: true,
+                    descricao: true,
+                    dataDaAtividade: true,
+                    status: true,
+                }
             });
              
             return update;
