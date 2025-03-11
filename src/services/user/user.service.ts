@@ -35,6 +35,7 @@ export const UserService = {
             const user = await prisma.user.create({
                 data: data,
                 select: {
+                    id: true,
                     email: true,
                     firstName: true,
                     lastName: true,
@@ -77,7 +78,7 @@ export const UserService = {
             const user = await prisma.user.findUnique({
                 where: {email},
             });
-            
+             
             
             return user;
         },
