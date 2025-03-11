@@ -115,8 +115,6 @@ export const TaskService = {
 
             updateTask.dataDaAtividade = data.dataDaAtividade
         }
-
-        try {
             const update = prisma.task.update({
                 where:{
                     id
@@ -132,14 +130,11 @@ export const TaskService = {
             });
              
             return update;
-        } catch (error) {
-            console.error("Erro interno ao atualizar task:", error);
-            throw new AppError("Erro interno ao atualizar task", 500);
-        }
+       
     },
 
      async delete(id: string) {
-        try {
+     
             const verifyTaskExists = await this.findById(id);
         
             if(!verifyTaskExists){
@@ -151,9 +146,5 @@ export const TaskService = {
             });
                         
             return deleteTask;
-        } catch (error) {
-            console.error("Erro interno ao deletar task:", error);
-            throw new AppError("Erro interno ao deletar task", 500);
-        }
     }
 }
