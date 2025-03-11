@@ -11,9 +11,8 @@ interface ITask {
     userId: string;
 }
 
-//TODO REMOVER REGRAS DE NEGOCIO DO CONTROLLER 
 export const TaskController = {
-    create: async (req: Request<{}, {}, ITask>, res: Response, next: NextFunction) => {
+    async create(req: Request<{}, {}, ITask>, res: Response, next: NextFunction) {
         const data: ITask = req.body;
 
         try {
@@ -26,7 +25,7 @@ export const TaskController = {
         }
     },
 
-    findAll: async (req: Request, res: Response, next: NextFunction) => {
+     async findAll(req: Request, res: Response, next: NextFunction) {
         try {
             const getTasks = await TaskService.findAll()
 
@@ -36,7 +35,7 @@ export const TaskController = {
         }
     },
 
-    findById:async (req: Request, res: Response, next: NextFunction) => {
+    async findById(req: Request, res: Response, next: NextFunction) {
         try {
             const id = req.params.id;
             const getTask = await TaskService.findById(id)
@@ -52,7 +51,7 @@ export const TaskController = {
         }
     },
 
-    update:async (req: Request<{id: string}, {}, ITask>, res: Response, next: NextFunction) => {
+     async update(req: Request<{id: string}, {}, ITask>, res: Response, next: NextFunction) {
         const id = req.params.id; 
         const data: ITask = req.body;
 
@@ -64,7 +63,7 @@ export const TaskController = {
         }
     },
 
-    delete:async (req: Request, res: Response, next: NextFunction) => {
+     async delete(req: Request, res: Response, next: NextFunction) {
         const id = req.params.id;
 
         try{
