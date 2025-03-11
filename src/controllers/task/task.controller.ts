@@ -1,31 +1,23 @@
 import { Request, Response, NextFunction } from "express";
 import {StatusCodes} from 'http-status-codes'
 import { verifyDate } from "../../utils/dataValidate";
-import { taskService } from "../../services/task/task.service";
+import { TaskService } from "../../services/task/task.service";
+import { UserService } from "../../services/user/user.service";
 
 interface ITask {
     titulo: string;
     descricao: string;
     dataDaAtividade: string;
+    userId: string;
 }
 
 export const TaskController = {
-    create: async (req: Request<{}, {}, ITask>, res: Response, next: NextFunction) => {
+    async create(req: Request<{}, {}, ITask>, res: Response, next: NextFunction) {
+        const data: ITask = req.body;
+
         try {
-            const data: ITask = req.body;
-
-            if(!data.titulo || data.titulo.trim() == ""){
-                res.status(StatusCodes.BAD_REQUEST).json({message: "Verifique se os campos foram preenchidos corretamente"});
-                return;
-            }
-
-            if(!data.dataDaAtividade || data.dataDaAtividade.trim() === ""){
-                res.status(StatusCodes.BAD_REQUEST).json({message: "Verifique se os campos foram preenchidos corretamente"});
-                return;
-            }
-
-            const task = await taskService.create(data);
-          
+            const task = await TaskService.create(data);
+    
             res.status(StatusCodes.CREATED).json({message: "Tarefa criada com sucesso", task});
             
         } catch (error) {
@@ -33,14 +25,9 @@ export const TaskController = {
         }
     },
 
-    findAll: async (req: Request, res: Response, next: NextFunction) => {
+     async findAll(req: Request, res: Response, next: NextFunction) {
         try {
-            const getTasks = await taskService.findAll()
-
-            if(getTasks.length === 0){
-                res.status(StatusCodes.NOT_FOUND).json({message: "Nenhuma tarefa encontrada"});
-                return;
-            }
+            const getTasks = await TaskService.findAll()
 
             res.status(StatusCodes.OK).json({tasks: getTasks});
         } catch (error) {
@@ -48,11 +35,10 @@ export const TaskController = {
         }
     },
 
-    findById:async (req: Request, res: Response, next: NextFunction) => {
+    async findById(req: Request, res: Response, next: NextFunction) {
         try {
             const id = req.params.id;
-            
-            const getTask = await taskService.findById(id)
+            const getTask = await TaskService.findById(id)
 
             if(!getTask){
                 res.status(StatusCodes.NOT_FOUND).json({message: "Nenhuma tarefa encontrada"});
@@ -65,48 +51,23 @@ export const TaskController = {
         }
     },
 
-    update:async (req: Request<{id: string}, {}, ITask>, res: Response, next: NextFunction) => {
+     async update(req: Request<{id: string}, {}, ITask>, res: Response, next: NextFunction) {
+        const id = req.params.id; 
+        const data: ITask = req.body;
+
         try{
-            const id = req.params.id;
-            const verifyId = await taskService.findById(id);
-            
-            if(!verifyId){
-                res.status(StatusCodes.NOT_FOUND).json({message: `Tarefa com o id ${id} não encontrada`});
-                return;
-            }
-            
-            const data: ITask = req.body;
-            
-            console.log(data);
-            
-            if(!data.titulo && !data.descricao && !data.dataDaAtividade){
-                res.status(StatusCodes.BAD_REQUEST).json({message: "Informe ao menos um valor para atualizar"});
-                return;
-            }
-
-            const updateTask = await taskService.update(id, data);
+            const updateTask = await TaskService.update(id, data);
             res.status(StatusCodes.OK).json({message: "Tarefa atualizada com sucesso!", task: updateTask});
-
         }  catch (error) {
             next(error)
         }
     },
 
-    delete:async (req: Request, res: Response, next: NextFunction) => {
-        try{
-            const id = req.params.id;
-            const verifyId = await taskService.findById(id)
+     async delete(req: Request, res: Response, next: NextFunction) {
+        const id = req.params.id;
 
-            if(!verifyId){
-                res.status(StatusCodes.NOT_FOUND).json({message: `Tarefa com o id ${id} não encontrada`});
-                return;
-            }
-            const deleteTask = await taskService.delete(id)
-        
-            if(!deleteTask){
-                res.status(StatusCodes.NOT_FOUND).json({message: "Nenhuma tarefa encontrada"});
-                return;
-            }
+        try{
+            await TaskService.delete(id);
 
             res.status(StatusCodes.OK).json({message: `Tarefa com o id ${id} deletada com sucesso!`});
         } catch (error) {
