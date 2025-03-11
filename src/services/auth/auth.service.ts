@@ -2,7 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import { AppError } from "../../utils/appError";
 import { UserService } from "../user/user.service"
 import { compare } from "bcrypt";
-import { genToken } from "../../utils/genToken";
+import { sign } from "./token.service";
 
 interface ILogin{
     email:string
@@ -27,7 +27,12 @@ export const AuthService ={
             throw new AppError("Email ou senha incorretos", StatusCodes.BAD_REQUEST);
         }
 
-        const token = genToken(userExists, "2h");
+        const user = {
+            id: userExists.id,
+            email: userExists.email
+        }
+
+        const token = sign(user, "2h");
 
         return token;
     }
