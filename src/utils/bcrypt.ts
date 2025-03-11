@@ -1,6 +1,5 @@
 import bcrypt from "bcrypt"
 
-//TODO
 export async function encryptPassword(password: string){
     const saltRonds = 10;
     const salt = await bcrypt.genSalt(saltRonds);

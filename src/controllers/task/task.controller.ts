@@ -11,6 +11,7 @@ interface ITask {
     userId: string;
 }
 
+//TODO REMOVER REGRAS DE NEGOCIO DO CONTROLLER 
 export const TaskController = {
     create: async (req: Request<{}, {}, ITask>, res: Response, next: NextFunction) => {
         const data: ITask = req.body;

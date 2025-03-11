@@ -14,7 +14,7 @@ interface IUserUpdate extends IUser {
 }
 
 export const UserController = {
-    create: async (req: Request<{}, {}, IUser>, res: Response, next: NextFunction) => {
+     async create (req: Request<{}, {}, IUser>, res: Response, next: NextFunction) {
         const data = req.body;
         try {            
             const user = await UserService.create(data);
@@ -24,7 +24,7 @@ export const UserController = {
         }
     },
 
-    findAll: async (req: Request, res: Response, next: NextFunction) => {
+    async findAll (req: Request, res: Response, next: NextFunction) {
         try {
             const users = await UserService.findAll();
             res.status(StatusCodes.OK).json({users});
@@ -33,7 +33,7 @@ export const UserController = {
         }
     },
 
-    findById: async (req: Request, res: Response, next: NextFunction) => {
+    async findById(req: Request, res: Response, next: NextFunction){
         const id = req.params.id;
 
         try {
@@ -44,7 +44,7 @@ export const UserController = {
         }
     },
 
-    update: async (req: Request<{id: string}, {}, IUserUpdate>, res: Response, next: NextFunction) => {
+    async update (req: Request<{id: string}, {}, IUserUpdate>, res: Response, next: NextFunction) {
             const id = req.params.id; 
             const data: IUserUpdate = req.body;
 
@@ -56,7 +56,7 @@ export const UserController = {
             }
     },
 
-    delete: async (req: Request, res: Response, next: NextFunction) => {
+    async delete (req: Request, res: Response, next: NextFunction) {
         const id = req.params.id;
         try{ 
             await UserService.delete(id);
