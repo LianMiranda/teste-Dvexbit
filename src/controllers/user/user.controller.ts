@@ -18,7 +18,7 @@ export const UserController = {
         const data = req.body;
         try {            
             const user = await UserService.create(data);
-            res.status(StatusCodes.OK).json({message: "Usuário criado com sucesso",user});
+            res.status(StatusCodes.CREATED).json({message: "Usuário criado com sucesso",user});
         } catch (error) {
             next(error)
         }

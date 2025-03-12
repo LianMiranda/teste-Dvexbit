@@ -2,7 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import { AppError } from "../../utils/appError";
 import { UserService } from "../user/user.service"
 import { compare } from "bcrypt";
-import { genToken } from "../../utils/genToken";
+import { sign } from "./token.service";
 
 interface ILogin{
     email:string
@@ -12,22 +12,27 @@ interface ILogin{
 export const AuthService ={
     async login(data:ILogin){
 
-        if(!data.email && !data.password){
-            throw new AppError("Verifique os campos", StatusCodes.BAD_REQUEST);
+        if(!data.email.trim() || !data.password.trim()){
+            throw new AppError("Verifique se os campos foram preenchidos", StatusCodes.UNPROCESSABLE_ENTITY);
         }
         const userExists = await UserService.findByEmail(data.email);
 
         if(!userExists){
-            throw new AppError("Verifique os campos e tente novamente", StatusCodes.BAD_REQUEST);
+            throw new AppError("Credênciais inválidas", StatusCodes.BAD_REQUEST);
         }
 
         const isValidPassword = await compare(data.password, userExists.password);
 
         if(!isValidPassword){
-            throw new AppError("Email ou senha incorretos", StatusCodes.BAD_REQUEST);
+            throw new AppError("Credênciais inválidas", StatusCodes.BAD_REQUEST);
         }
 
-        const token = genToken(userExists, "2h");
+        const user = {
+            id: userExists.id,
+            email: userExists.email
+        }
+
+        const token = sign(user, "2h");
 
         return token;
     }
