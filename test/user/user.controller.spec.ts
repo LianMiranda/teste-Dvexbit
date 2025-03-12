@@ -1,9 +1,10 @@
     import { request } from "../jest.setup";
+    let newUserId: string;
 
     describe("User Methods", () => {
         it("Cria o registro de um usuário", async () => {
             const response = await request.post("/user").send({
-                email: `usuarioteste${Date.now()}@gmail.com`,
+                email: `usuarioteste@gmail.com`,
                 password: "1234",
                 firstName: "Teste",
                 lastName: "da Silva"
@@ -13,6 +14,10 @@
             expect(response.statusCode).toBe(201);
 
             expect(response.body).toHaveProperty("user");
+
+            newUserId = response.body.user.id
+
+
         });
 
         it("Impede a criação de um usuário com campos vazios", async () => {
@@ -57,8 +62,8 @@
         });
 
         it("Deleta um usuário", async () => {
-            const response = await request.delete(`/user/${global.userId}`).set("Authorization", `Bearer ${global.token}`);
-            expect(response.body.message).toBe(`Usuário com o id ${global.userId} deletado com sucesso!`);
+            const response = await request.delete(`/user/${newUserId}`).set("Authorization", `Bearer ${global.token}`);
+            expect(response.body.message).toBe(`Usuário com o id ${newUserId} deletado com sucesso!`);
             expect(response.statusCode).toBe(200);
         });
     });

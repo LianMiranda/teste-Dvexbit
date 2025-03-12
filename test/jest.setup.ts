@@ -1,5 +1,8 @@
 import supertest from "supertest";
 import app from "../src";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient()
 
 export const request = supertest(app);
 
@@ -14,7 +17,7 @@ export const userTest = {
   lastName: "da Silva",
 };
 
-beforeAll(async () => {
+beforeAll(async () => {  
   const userResponse = await request.post("/user").send(userTest);
   userId = userResponse.body.user.id;
 
@@ -31,7 +34,7 @@ beforeAll(async () => {
   global.password = userTest.password;
 });
 
-afterAll(async () => {
+afterAll(async () => {  
   if (userId) {
     await request.delete(`/user/${userId}`).set("Authorization", `Bearer ${global.token}`);
   }
