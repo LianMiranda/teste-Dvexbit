@@ -15,12 +15,9 @@ interface IUser {
 
 export const UserService = {
     async create(data: IUser){
-            console.log(data);
-
             if (!data.email?.trim() || !data.password?.trim() || !data.firstName?.trim() || !data.lastName?.trim()) {
                 throw new AppError("Verifique se os campos foram preenchidos corretamente", StatusCodes.BAD_REQUEST);
             }
-            console.log(data);
 
             const verifyEmailExists = await this.findByEmail(data.email);
 

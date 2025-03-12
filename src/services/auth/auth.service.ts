@@ -12,19 +12,19 @@ interface ILogin{
 export const AuthService ={
     async login(data:ILogin){
 
-        if(!data.email && !data.password){
-            throw new AppError("Verifique os campos", StatusCodes.BAD_REQUEST);
+        if(!data.email.trim() || !data.password.trim()){
+            throw new AppError("Verifique se os campos foram preenchidos", StatusCodes.UNPROCESSABLE_ENTITY);
         }
         const userExists = await UserService.findByEmail(data.email);
 
         if(!userExists){
-            throw new AppError("Verifique os campos e tente novamente", StatusCodes.BAD_REQUEST);
+            throw new AppError("Credênciais inválidas", StatusCodes.BAD_REQUEST);
         }
 
         const isValidPassword = await compare(data.password, userExists.password);
 
         if(!isValidPassword){
-            throw new AppError("Email ou senha incorretos", StatusCodes.BAD_REQUEST);
+            throw new AppError("Credênciais inválidas", StatusCodes.BAD_REQUEST);
         }
 
         const user = {
