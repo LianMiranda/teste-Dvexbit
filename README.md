@@ -11,6 +11,8 @@ Este projeto é uma API desenvolvida em Node.js com Express e TypeScript, com o 
 - [Recursos](#recursos)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Instalação e Configuração](#instalação-e-configuração)
+- [Testes](#testes)
+- [Documentação com Swagger](#documentação-com-swagger)
 - [Endpoints da API](#endpoints-da-api)
   - [Rotas de Tarefas](#rotas-de-tarefas)
   - [Rotas de Usuário](#rotas-de-usuário)
