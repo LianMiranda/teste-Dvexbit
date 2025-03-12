@@ -6,14 +6,12 @@ interface IJwtData{
     email:string
 }
 
-export async function sign(user: IJwtData, expiresIn: string){
+export async function sign(user: IJwtData){
     const secret = process.env.SECRET;
 
     if (!secret) throw new Error("A variável de ambiente SECRET não está definida.");
-
-    const options: SignOptions = {expiresIn};
     
-    const token = jwt.sign(user, secret, options);    
+    const token = jwt.sign(user, secret, {expiresIn: "2h"});    
     
     return token;
 }

@@ -32,7 +32,7 @@ export const AuthService ={
             email: userExists.email
         }
 
-        const token = sign(user, "2h");
+        const token = sign(user);
 
         return token;
     }

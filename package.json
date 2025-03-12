@@ -15,6 +15,7 @@
     "@types/express": "^5.0.0",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.13.9",
+    "@types/validator": "^13.12.2",
     "prisma": "^6.4.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.3",
