@@ -44,7 +44,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEzMWE2ZWFjLTU4NTUtNGUzNy05YWZiLWJiZDA1OThhOWNmMCIsImVtYWlsIjoidGVzdGUxQGdtYWlsLmNvbSIsImlhdCI6MTc0MTc4ODMwNywiZXhwIjoxNzQxNzk1NTA3fQ.ZDB7C2Lz3hpNc32AqrkZoTbHmI6kdjjyZcBFmLct5AY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZjMxMWI5LWQ1YTctNGM4ZS04NmVmLTdiYTIyMjA4YzBhNiIsImVtYWlsIjoidGVzdGUxMkBnbWFpbC5jb20iLCJpYXQiOjE3NDE3OTcxMTIsImV4cCI6MTc0MTgwNDMxMn0.AlOP1_Q0is9SdQAMUM4yjXFk76RvQKocBGN04ADaKnI",
 									"type": "string"
 								}
 							]
@@ -67,17 +67,27 @@
 				{
 					"name": "FIND USER BY ID",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZjMxMWI5LWQ1YTctNGM4ZS04NmVmLTdiYTIyMjA4YzBhNiIsImVtYWlsIjoidGVzdGUxMkBnbWFpbC5jb20iLCJpYXQiOjE3NDE3OTcxMTIsImV4cCI6MTc0MTgwNDMxMn0.AlOP1_Q0is9SdQAMUM4yjXFk76RvQKocBGN04ADaKnI",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/user/27b31916-068d-40d9-845e-5ff1392ba0ab",
+							"raw": "localhost:3000/user/bbf311b9-d5a7-4c8e-86ef-7ba22208c0a6",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"user",
-								"27b31916-068d-40d9-845e-5ff1392ba0ab"
+								"bbf311b9-d5a7-4c8e-86ef-7ba22208c0a6"
 							]
 						}
 					},
@@ -86,11 +96,21 @@
 				{
 					"name": "UPDATE USER",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZjMxMWI5LWQ1YTctNGM4ZS04NmVmLTdiYTIyMjA4YzBhNiIsImVtYWlsIjoidGVzdGUxMkBnbWFpbC5jb20iLCJpYXQiOjE3NDE3OTcxMTIsImV4cCI6MTc0MTgwNDMxMn0.AlOP1_Q0is9SdQAMUM4yjXFk76RvQKocBGN04ADaKnI",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \" \",\r\n    \"password\": \"\",\r\n    \"actualPassword\": \"\",\r\n    \"firstName\": \" \",\r\n    \"lastName\": \" \"\r\n}   ",
+							"raw": "{\r\n    \"email\": \"\",\r\n    \"password\": \"123\",\r\n    \"actualPassword\": \"1234\",\r\n    \"firstName\": \" \",\r\n    \"lastName\": \" \"\r\n}   ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -98,14 +118,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/user/27b31916-068d-40d9-845e-5ff1392ba0ab",
+							"raw": "localhost:3000/user/bbf311b9-d5a7-4c8e-86ef-7ba22208c0a6",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"user",
-								"27b31916-068d-40d9-845e-5ff1392ba0ab"
+								"bbf311b9-d5a7-4c8e-86ef-7ba22208c0a6"
 							]
 						}
 					},
@@ -114,17 +134,27 @@
 				{
 					"name": "DELETE USER",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZjMxMWI5LWQ1YTctNGM4ZS04NmVmLTdiYTIyMjA4YzBhNiIsImVtYWlsIjoidGVzdGUxMkBnbWFpbC5jb20iLCJpYXQiOjE3NDE3OTcxMTIsImV4cCI6MTc0MTgwNDMxMn0.AlOP1_Q0is9SdQAMUM4yjXFk76RvQKocBGN04ADaKnI",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/user/27b31916-068d-40d9-845e-5ff1392ba0ab",
+							"raw": "localhost:3000/user/bbf311b9-d5a7-4c8e-86ef-7ba22208c0a6",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"user",
-								"27b31916-068d-40d9-845e-5ff1392ba0ab"
+								"bbf311b9-d5a7-4c8e-86ef-7ba22208c0a6"
 							]
 						}
 					},
@@ -142,7 +172,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"teste1@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"raw": "{\r\n    \"email\": \"lianmiranda26@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -175,7 +205,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEzMWE2ZWFjLTU4NTUtNGUzNy05YWZiLWJiZDA1OThhOWNmMCIsImVtYWlsIjoidGVzdGUxQGdtYWlsLmNvbSIsImlhdCI6MTc0MTc4ODMwNywiZXhwIjoxNzQxNzk1NTA3fQ.ZDB7C2Lz3hpNc32AqrkZoTbHmI6kdjjyZcBFmLct5AY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZjMxMWI5LWQ1YTctNGM4ZS04NmVmLTdiYTIyMjA4YzBhNiIsImVtYWlsIjoidGVzdGUxMkBnbWFpbC5jb20iLCJpYXQiOjE3NDE3OTcxMTIsImV4cCI6MTc0MTgwNDMxMn0.AlOP1_Q0is9SdQAMUM4yjXFk76RvQKocBGN04ADaKnI",
 									"type": "string"
 								}
 							]
@@ -184,7 +214,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"titulo\": \"\",\r\n    \"descricao\": \"\",\r\n    \"dataDaAtividade\": \"2025-03-12\"\r\n}",
+							"raw": "{\r\n    \"titulo\": \"asddasdas\",\r\n    \"descricao\": \"\",\r\n    \"dataDaAtividade\": \"2025-03-12\",\r\n    \"status\": \"EM_ANDAMENTO\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -192,14 +222,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/task/fa9e2aa1-491e-4879-b01d-ab3037974269",
+							"raw": "localhost:3000/task/95b4dea1-be95-4671-aa0f-2b3978f30c59",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"task",
-								"fa9e2aa1-491e-4879-b01d-ab3037974269"
+								"95b4dea1-be95-4671-aa0f-2b3978f30c59"
 							]
 						}
 					},
@@ -213,7 +243,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEzMWE2ZWFjLTU4NTUtNGUzNy05YWZiLWJiZDA1OThhOWNmMCIsImVtYWlsIjoidGVzdGUxQGdtYWlsLmNvbSIsImlhdCI6MTc0MTc4ODMwNywiZXhwIjoxNzQxNzk1NTA3fQ.ZDB7C2Lz3hpNc32AqrkZoTbHmI6kdjjyZcBFmLct5AY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZjMxMWI5LWQ1YTctNGM4ZS04NmVmLTdiYTIyMjA4YzBhNiIsImVtYWlsIjoidGVzdGUxMkBnbWFpbC5jb20iLCJpYXQiOjE3NDE3OTcxMTIsImV4cCI6MTc0MTgwNDMxMn0.AlOP1_Q0is9SdQAMUM4yjXFk76RvQKocBGN04ADaKnI",
 									"type": "string"
 								}
 							]
@@ -222,7 +252,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"titulo\": \"Estudar para concurso\",\r\n    \"descricao\": \"Lingua-Portuguesa\",\r\n    \"dataDaAtividade\": \"2025-04-30\",\r\n    \"userId\": \"131a6eac-5855-4e37-9afb-bbd0598a9cf0\"\r\n}",
+							"raw": "{\r\n    \"titulo\": \"Estudar para concurso\",\r\n    \"descricao\": \"Lingua-Portuguesa\",\r\n    \"dataDaAtividade\": \"2025-04-30\",\r\n    \"userId\": \"713da82a-452d-4ad7-8ddd-5e0d25097908\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -250,7 +280,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEzMWE2ZWFjLTU4NTUtNGUzNy05YWZiLWJiZDA1OThhOWNmMCIsImVtYWlsIjoidGVzdGUxQGdtYWlsLmNvbSIsImlhdCI6MTc0MTc4ODMwNywiZXhwIjoxNzQxNzk1NTA3fQ.ZDB7C2Lz3hpNc32AqrkZoTbHmI6kdjjyZcBFmLct5AY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZjMxMWI5LWQ1YTctNGM4ZS04NmVmLTdiYTIyMjA4YzBhNiIsImVtYWlsIjoidGVzdGUxMkBnbWFpbC5jb20iLCJpYXQiOjE3NDE3OTcxMTIsImV4cCI6MTc0MTgwNDMxMn0.AlOP1_Q0is9SdQAMUM4yjXFk76RvQKocBGN04ADaKnI",
 									"type": "string"
 								}
 							]
@@ -279,7 +309,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEzMWE2ZWFjLTU4NTUtNGUzNy05YWZiLWJiZDA1OThhOWNmMCIsImVtYWlsIjoidGVzdGUxQGdtYWlsLmNvbSIsImlhdCI6MTc0MTc4ODMwNywiZXhwIjoxNzQxNzk1NTA3fQ.ZDB7C2Lz3hpNc32AqrkZoTbHmI6kdjjyZcBFmLct5AY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZjMxMWI5LWQ1YTctNGM4ZS04NmVmLTdiYTIyMjA4YzBhNiIsImVtYWlsIjoidGVzdGUxMkBnbWFpbC5jb20iLCJpYXQiOjE3NDE3OTcxMTIsImV4cCI6MTc0MTgwNDMxMn0.AlOP1_Q0is9SdQAMUM4yjXFk76RvQKocBGN04ADaKnI",
 									"type": "string"
 								}
 							]
