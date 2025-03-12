@@ -44,8 +44,20 @@ export const UserService = {
 
     async findAll(){
             const users = await prisma.user.findMany({
-                include: {
-                    tasks: true,
+                select:{
+                    id: true,
+                    email: true, 
+                    firstName:true,
+                    lastName: true,
+                    tasks: {
+                        select:{
+                            id: true,
+                            titulo: true,
+                            descricao: true,
+                            dataDaAtividade: true,
+                            status: true
+                        }
+                    }
                 }
             });
             
@@ -59,8 +71,21 @@ export const UserService = {
     async findById(id: string){
             const user = await prisma.user.findUnique({
                 where: {id},
-                include: {
-                    tasks: true,
+                select:{
+                    id: true,
+                    email: true, 
+                    password: true, 
+                    firstName:true,
+                    lastName: true,
+                    tasks: {
+                        select:{
+                            id: true,
+                            titulo: true,
+                            descricao: true,
+                            dataDaAtividade: true,
+                            status: true
+                        }
+                    }
                 }
             });
 
@@ -74,6 +99,22 @@ export const UserService = {
         async findByEmail(email: string){
             const user = await prisma.user.findUnique({
                 where: {email},
+                select:{
+                    id: true,
+                    email: true,
+                    password: true,
+                    firstName:true,
+                    lastName: true,
+                    tasks: {
+                        select:{
+                            id: true,
+                            titulo: true,
+                            descricao: true,
+                            dataDaAtividade: true,
+                            status: true
+                        }
+                    }
+                }
             });
              
             
@@ -115,7 +156,7 @@ export const UserService = {
                     password = await encryptPassword(data.password);
                     updateUser.password = password;
                 }else{
-                     throw new AppError("Senha atual incorreta", StatusCodes.NOT_ACCEPTABLE)
+                     throw new AppError("Senha atual incorreta", StatusCodes.FORBIDDEN)
                 }
             }
 
@@ -127,6 +168,13 @@ export const UserService = {
                     id
                 },
                 data: updateUser,      
+                select:{
+                    id: true,
+                    email: true,
+                    password: true,
+                    firstName:true,
+                    lastName: true,
+                }
             });
                 
             return update;
