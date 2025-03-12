@@ -306,7 +306,8 @@
                   "value": {
                     "titulo": "Novo título",
                     "descricao": "Nova descrição",
-                    "dataDaAtividade": "2023-10-15"
+                    "dataDaAtividade": "2023-10-15",
+                    "status": "EM_ANDAMENTO"
                   }
                 }
               }
