@@ -86,6 +86,10 @@ Este projeto é uma API desenvolvida em Node.js com Express e TypeScript, com o 
 
    Importe o arquivo `TodoList.postman_collection` no Postman.
 
+
+## Documentação com Swagger
+Acesse a documentação da API via Swagger na rota `/docs`. Realize o cadastro e o login para obter seu token de acesso. Em seguida, clique no botão verde **Authorize** e insira o token para autenticar todas as rotas.
+
 ## Endpoints da API
 
 ### Rotas de Tarefas
@@ -308,5 +312,3 @@ router.delete("/user/:id", auth, UserController.delete);
 // Rota de Autenticação
 router.post("/auth", AuthController.login);
 ```
-
----
