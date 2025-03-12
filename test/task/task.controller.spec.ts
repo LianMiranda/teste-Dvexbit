@@ -1,33 +1,5 @@
 import { request } from "../jest.setup";
-
-let userId: string;
 let taskId: string;
-let token: string;
-
-export const userTest = {
-  email: `usuarioteste2${Date.now()}@gmail.com`,
-  password: "1234",
-  firstName: "Teste",
-  lastName: "da Silva",
-};
-
-beforeAll(async () => {
-  const user = await request.post("/user").send(userTest);
-  expect(user.body).toHaveProperty("user");
-
-  const auth = await request.post("/auth").send({
-    email: userTest.email,
-    password:userTest.password,
-  });
-
-  token = auth.body.token;
-
-  userId = user.body.user.id;
-});
-
-afterAll(async () => {
-  if (userId) await request.delete(`/user/${userId}`).set("Authorization", `Bearer ${token}`);
-});
 
 describe("Task Methods", () => {
   it("Cria o registro de uma tarefa", async () => {
@@ -37,7 +9,7 @@ describe("Task Methods", () => {
             titulo: "Estudar programação",
             descricao: "Java",
             dataDaAtividade: "2025-03-22",
-            userId: userId
+            userId: global.userId
       }).set("Authorization", `Bearer ${token}`);
 
         expect(response.body.message).toBe("Tarefa criada com sucesso");
@@ -54,7 +26,7 @@ describe("Task Methods", () => {
             titulo: " ",
             descricao: "Java",
             dataDaAtividade: "2025-03-22",
-            userId: userId,
+            userId: global.userId,
         })
         .set("Authorization", `Bearer ${token}`);
 
@@ -84,7 +56,7 @@ describe("Task Methods", () => {
             titulo: "Estudar programação",
             descricao: "Java",
             dataDaAtividade: "",
-            userId: userId,
+            userId:  global.userId,
         })
         .set("Authorization", `Bearer ${token}`);
 
@@ -108,7 +80,7 @@ describe("Task Methods", () => {
 
     it("Deve impedir o update de um usuário específico com nenhum campo preenchido", async () => {
         const response = await request
-        .put(`/user/${userId}`)
+        .put(`/user/${global.userId}`)
         .send({
             email: "",
             password: "",
