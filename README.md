@@ -70,6 +70,9 @@ Este projeto é uma API desenvolvida em Node.js com Express e TypeScript, com o 
    npm run dev
    ```
 
+### Para rodar com postman
+  Importe o arquivo `TodoList.postman_collection` no postman.
+
 ## Endpoints da API
 
 ### Rotas de Tarefas
