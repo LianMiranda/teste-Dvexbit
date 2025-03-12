@@ -45,7 +45,7 @@ Este projeto é uma API desenvolvida em Node.js com Express e TypeScript, com o 
 
    ```bash
    git clone https://github.com/LianMiranda/teste-Dvexbit
-   cd nome-do-projeto
+   cd teste-Dvexbit
    ```
 
 2. **Instale as Dependências**
@@ -80,13 +80,13 @@ Este projeto é uma API desenvolvida em Node.js com Express e TypeScript, com o 
    npm run dev
    ```
 
-7. **Para rodar com Postman**
+7. **Para fazer as requisições com Postman**
 
    Importe o arquivo `TodoList.postman_collection` no Postman.
 
 
 ## Testes
-1. **Para rodar**
+1. **Para rodar os testes**
 
    ```bash
    npm run test
@@ -218,7 +218,7 @@ As rotas para gerenciamento de usuários também contam com proteção via middl
       "senha": "senha_secreta"
     }
     ```
-  - **Descrição:** Este endpoint realiza a autenticação do usuário e, caso os dados estejam corretos, retorna um token JWT para acesso às rotas protegidas.
+  - **Descrição:** Este endpoint realiza a autenticação do usuário com um login e, caso os dados estejam corretos, retorna um token JWT para acesso às rotas protegidas.
   - **Resposta:**  
     - **Status:** 200 (OK)  
     - **Body:** `{ "token": "seu_token_jwt"}`
