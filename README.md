@@ -137,7 +137,8 @@ Todas as rotas de tarefas estão protegidas por autenticação (middleware `auth
     {
       "titulo": "Novo Título",
       "descricao": "Nova descrição",
-      "dataDaAtividade": "2025-03-10"
+      "dataDaAtividade": "2025-03-10",
+      "status": "PENDENTE"
     }
     ```
   - **Resposta:**  

@@ -8,6 +8,7 @@ interface ITask {
     titulo: string;
     descricao: string;
     dataDaAtividade: string;
+    status: string;
     userId: string;
 }
 

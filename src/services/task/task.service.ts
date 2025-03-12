@@ -1,15 +1,18 @@
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient, Status } from "@prisma/client"
 import { verifyDate } from "../../utils/dataValidate";
 import { AppError } from "../../utils/appError";
 import { StatusCodes } from "http-status-codes";
 import { UserService } from "../user/user.service";
-
 const prisma = new PrismaClient();
 interface ITask {
     titulo: string;
     descricao: string;
     dataDaAtividade: string;
     userId: string;
+}
+
+interface ITaskUpdate extends ITask {
+   status?: string
 }
 
 export const TaskService = {
@@ -91,8 +94,8 @@ export const TaskService = {
         return task;
     },
 
-    async update(id: string, data:ITask) {
-        const updateTask: Partial<{ titulo: string, descricao: string, dataDaAtividade: string}> = {}
+    async update(id: string, data:ITaskUpdate) {
+        const updateTask: Partial<{ titulo: string, descricao: string, dataDaAtividade: string, status: Status }> = {}
 
         const verifyTaskExists = await this.findById(id);
         
@@ -115,10 +118,16 @@ export const TaskService = {
 
             updateTask.dataDaAtividade = data.dataDaAtividade
         }
+        if (data.status && data.status.trim() !== "") {
+            if (data.status !== "PENDENTE" && data.status !== "EM_ANDAMENTO" && data.status !== "CONCLUIDO") {
+                throw new AppError("O status deve ser: PENDENTE, EM_ANDAMENTO ou CONCLUIDO", 400);
+            }
+            updateTask.status = data.status as Status;
+        }
+
+        
             const update = prisma.task.update({
-                where:{
-                    id
-                },
+                where:{ id },
                 data: updateTask,      
                 select: {
                     id: true,
