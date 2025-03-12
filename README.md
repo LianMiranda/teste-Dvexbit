@@ -1,7 +1,3 @@
-Segue abaixo a versão revisada da documentação, agora com as novas rotas e dependências adicionadas:
-
----
-
 # teste-Dvexbit
 
 Este projeto é uma API desenvolvida em Node.js com Express e TypeScript, com o objetivo de gerenciar tarefas (CRUD) e usuários, além de realizar autenticação. A API utiliza o Prisma para interação com o banco de dados PostgreSQL, conta com validações, tratamento centralizado de erros e proteção das rotas através de um middleware de autenticação.
