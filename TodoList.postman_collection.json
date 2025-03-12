@@ -1,0 +1,364 @@
+{
+	"info": {
+		"_postman_id": "2d098ecc-d418-40be-a49d-68467c77fb22",
+		"name": "TodoList",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42903139"
+	},
+	"item": [
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "CREATE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"lian@gmail.com\",\r\n    \"password\": \"123\",\r\n    \"firstName\": \"Lian\",\r\n    \"lastName\": \"Souza Miranda Mendes\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/user",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZjMxMWI5LWQ1YTctNGM4ZS04NmVmLTdiYTIyMjA4YzBhNiIsImVtYWlsIjoidGVzdGUxMkBnbWFpbC5jb20iLCJpYXQiOjE3NDE3OTcxMTIsImV4cCI6MTc0MTgwNDMxMn0.AlOP1_Q0is9SdQAMUM4yjXFk76RvQKocBGN04ADaKnI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND USER BY ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZjMxMWI5LWQ1YTctNGM4ZS04NmVmLTdiYTIyMjA4YzBhNiIsImVtYWlsIjoidGVzdGUxMkBnbWFpbC5jb20iLCJpYXQiOjE3NDE3OTcxMTIsImV4cCI6MTc0MTgwNDMxMn0.AlOP1_Q0is9SdQAMUM4yjXFk76RvQKocBGN04ADaKnI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/user/bbf311b9-d5a7-4c8e-86ef-7ba22208c0a6",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"bbf311b9-d5a7-4c8e-86ef-7ba22208c0a6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE USER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZjMxMWI5LWQ1YTctNGM4ZS04NmVmLTdiYTIyMjA4YzBhNiIsImVtYWlsIjoidGVzdGUxMkBnbWFpbC5jb20iLCJpYXQiOjE3NDE3OTcxMTIsImV4cCI6MTc0MTgwNDMxMn0.AlOP1_Q0is9SdQAMUM4yjXFk76RvQKocBGN04ADaKnI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"\",\r\n    \"password\": \"123\",\r\n    \"actualPassword\": \"1234\",\r\n    \"firstName\": \" \",\r\n    \"lastName\": \" \"\r\n}   ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/user/bbf311b9-d5a7-4c8e-86ef-7ba22208c0a6",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"bbf311b9-d5a7-4c8e-86ef-7ba22208c0a6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE USER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZjMxMWI5LWQ1YTctNGM4ZS04NmVmLTdiYTIyMjA4YzBhNiIsImVtYWlsIjoidGVzdGUxMkBnbWFpbC5jb20iLCJpYXQiOjE3NDE3OTcxMTIsImV4cCI6MTc0MTgwNDMxMn0.AlOP1_Q0is9SdQAMUM4yjXFk76RvQKocBGN04ADaKnI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/user/bbf311b9-d5a7-4c8e-86ef-7ba22208c0a6",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"bbf311b9-d5a7-4c8e-86ef-7ba22208c0a6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"lianmiranda26@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/auth",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TASK",
+			"item": [
+				{
+					"name": "UPDATE TASK",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZjMxMWI5LWQ1YTctNGM4ZS04NmVmLTdiYTIyMjA4YzBhNiIsImVtYWlsIjoidGVzdGUxMkBnbWFpbC5jb20iLCJpYXQiOjE3NDE3OTcxMTIsImV4cCI6MTc0MTgwNDMxMn0.AlOP1_Q0is9SdQAMUM4yjXFk76RvQKocBGN04ADaKnI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"asddasdas\",\r\n    \"descricao\": \"\",\r\n    \"dataDaAtividade\": \"2025-03-12\",\r\n    \"status\": \"EM_ANDAMENTO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/task/95b4dea1-be95-4671-aa0f-2b3978f30c59",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"task",
+								"95b4dea1-be95-4671-aa0f-2b3978f30c59"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE TASK",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZjMxMWI5LWQ1YTctNGM4ZS04NmVmLTdiYTIyMjA4YzBhNiIsImVtYWlsIjoidGVzdGUxMkBnbWFpbC5jb20iLCJpYXQiOjE3NDE3OTcxMTIsImV4cCI6MTc0MTgwNDMxMn0.AlOP1_Q0is9SdQAMUM4yjXFk76RvQKocBGN04ADaKnI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Estudar para concurso\",\r\n    \"descricao\": \"Lingua-Portuguesa\",\r\n    \"dataDaAtividade\": \"2025-04-30\",\r\n    \"userId\": \"713da82a-452d-4ad7-8ddd-5e0d25097908\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/task",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"task"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE TASK",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZjMxMWI5LWQ1YTctNGM4ZS04NmVmLTdiYTIyMjA4YzBhNiIsImVtYWlsIjoidGVzdGUxMkBnbWFpbC5jb20iLCJpYXQiOjE3NDE3OTcxMTIsImV4cCI6MTc0MTgwNDMxMn0.AlOP1_Q0is9SdQAMUM4yjXFk76RvQKocBGN04ADaKnI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/task/fa9e2aa1-491e-4879-b01d-ab3037974269",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"task",
+								"fa9e2aa1-491e-4879-b01d-ab3037974269"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJiZjMxMWI5LWQ1YTctNGM4ZS04NmVmLTdiYTIyMjA4YzBhNiIsImVtYWlsIjoidGVzdGUxMkBnbWFpbC5jb20iLCJpYXQiOjE3NDE3OTcxMTIsImV4cCI6MTc0MTgwNDMxMn0.AlOP1_Q0is9SdQAMUM4yjXFk76RvQKocBGN04ADaKnI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/tasks",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND TASK BY ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEzMWE2ZWFjLTU4NTUtNGUzNy05YWZiLWJiZDA1OThhOWNmMCIsImVtYWlsIjoidGVzdGUxQGdtYWlsLmNvbSIsImlhdCI6MTc0MTc4ODMwNywiZXhwIjoxNzQxNzk1NTA3fQ.ZDB7C2Lz3hpNc32AqrkZoTbHmI6kdjjyZcBFmLct5AY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/task/fa9e2aa1-491e-4879-b01d-ab3037974269",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"task",
+								"fa9e2aa1-491e-4879-b01d-ab3037974269"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
