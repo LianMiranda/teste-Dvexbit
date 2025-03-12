@@ -13,12 +13,19 @@ interface IUserUpdate extends IUser {
     actualPassword: string;
 }
 
+const HATEOAS = (id: string) => [
+    { rel: "self", method: "GET", href: `/user/${id}` },
+    { rel: "update", method: "PUT", href: `/user/${id}` },
+    { rel: "delete", method: "DELETE", href: `/user/${id}` },
+    { rel: "all_users", method: "GET", href: "/users" }
+];
+
 export const UserController = {
-     async create (req: Request<{}, {}, IUser>, res: Response, next: NextFunction) {
+     async create (req: Request<{}, {}, IUser>, res: Response, next: NextFunction){
         const data = req.body;
         try {            
             const user = await UserService.create(data);
-            res.status(StatusCodes.CREATED).json({message: "Usuário criado com sucesso",user});
+            res.status(StatusCodes.CREATED).json({message: "Usuário criado com sucesso",user, links: HATEOAS(user.id)});
         } catch (error) {
             next(error)
         }
@@ -38,7 +45,7 @@ export const UserController = {
 
         try {
             const user = await UserService.findById(id);
-            res.status(StatusCodes.OK).json({user});
+            res.status(StatusCodes.OK).json({user,links: HATEOAS(user.id)});
         } catch (error) {
             next(error)
         }
@@ -50,7 +57,7 @@ export const UserController = {
 
             try{
                 const updateUser = await UserService.update(id, data);
-                res.status(StatusCodes.OK).json({message: "Usuário atualizado com sucesso!", task: updateUser});
+                res.status(StatusCodes.OK).json({message: "Usuário atualizado com sucesso!", task: updateUser, links: HATEOAS(updateUser.id)});
             }  catch (error) {
                 next(error)
             }

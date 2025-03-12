@@ -11,6 +11,14 @@ interface ITask {
     userId: string;
 }
 
+const HATEOAS = (id: string) => [
+    { rel: "self", method: "GET", href: `/task/${id}` },
+    { rel: "update", method: "PUT", href: `/task/${id}` },
+    { rel: "delete", method: "DELETE", href: `/task/${id}` },
+    { rel: "all_tasks", method: "GET", href: "/tasks" }
+];
+
+
 export const TaskController = {
     async create(req: Request<{}, {}, ITask>, res: Response, next: NextFunction) {
         const data: ITask = req.body;
@@ -18,7 +26,7 @@ export const TaskController = {
         try {
             const task = await TaskService.create(data);
     
-            res.status(StatusCodes.CREATED).json({message: "Tarefa criada com sucesso", task});
+            res.status(StatusCodes.CREATED).json({message: "Tarefa criada com sucesso", task, links: HATEOAS(task.id)});
             
         } catch (error) {
            next(error)
@@ -45,7 +53,7 @@ export const TaskController = {
                 return;
             }
 
-            res.status(StatusCodes.OK).json({task: getTask});
+            res.status(StatusCodes.OK).json({task: getTask, links: HATEOAS(getTask.id)});
         }  catch (error) {
             next(error)
         }
@@ -57,7 +65,7 @@ export const TaskController = {
 
         try{
             const updateTask = await TaskService.update(id, data);
-            res.status(StatusCodes.OK).json({message: "Tarefa atualizada com sucesso!", task: updateTask});
+            res.status(StatusCodes.OK).json({message: "Tarefa atualizada com sucesso!", task: updateTask, links: HATEOAS(updateTask.id)});
         }  catch (error) {
             next(error)
         }

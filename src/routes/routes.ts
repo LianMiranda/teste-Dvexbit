@@ -6,17 +6,17 @@ import { auth } from "../middlewares/auth";
 
 const router = Router();
 
-router.post("/task", TaskController.create);
-router.get("/tasks", TaskController.findAll);
-router.get("/task/:id", TaskController.findById);
-router.put("/task/:id", TaskController.update);
-router.delete("/task/:id", TaskController.delete);
+router.post("/task", auth, TaskController.create);
+router.get("/tasks", auth,TaskController.findAll);
+router.get("/task/:id",auth,TaskController.findById);
+router.put("/task/:id", auth,TaskController.update);
+router.delete("/task/:id", auth,TaskController.delete);
 
 router.post("/user", UserController.create);
 router.get("/users",auth, UserController.findAll);
-router.get("/user/:id", UserController.findById);
-router.put("/user/:id", UserController.update);
-router.delete("/user/:id", UserController.delete);
+router.get("/user/:id", auth,UserController.findById);
+router.put("/user/:id", auth,UserController.update);
+router.delete("/user/:id", auth,UserController.delete);
 
 router.post("/auth", AuthController.login);
 
